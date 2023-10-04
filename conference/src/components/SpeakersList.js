@@ -1,12 +1,37 @@
+import { data } from "@/SpeakerData";
 import Speaker from "./Speaker";
+import { useState } from "react";
 
-const SpeakersList = ({ data, showSessions }) => {
+
+const SpeakersList = ({ showSessions }) => {
+
+    const[speakerData, setSpeakerData]=useState(data);
+
+    function onFavoriteToggle(id) {
+        const speakersRecPrevious = speakerData.find( rec => rec.id === id);
+        const speakerRecUpdated = {
+            ...speakersRecPrevious, 
+            favorite: !speakersRecPrevious.favorite
+        };
+        const speakersDataNew = speakerData.map((rec) => {
+            return rec.id === id ? speakerRecUpdated :rec;
+        })
+
+        setSpeakerData(speakersDataNew);
+    }
     return ( 
         <div className="container speaker-list">
             <div className="row">
-                {data.map(function(speaker) {
+                {speakerData.map(function(speaker) {
                 return (
-                    <Speaker key={speaker.id} speaker={speaker} showSessions={showSessions}/>
+                    <Speaker 
+                        key={speaker.id} 
+                        speaker={speaker} 
+                        showSessions={showSessions} 
+                        onFavoriteToggle={() => {
+                            onFavoriteToggle(speaker.id);
+                        }}
+                    />
                 )
                 })}
             </div>
