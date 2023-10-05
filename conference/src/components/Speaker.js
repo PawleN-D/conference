@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from "react";
+
+
 function Session({ title, room}){
     return (
         <span className="session w-100">
@@ -28,16 +31,30 @@ function SpeakerImage({ id, first, last }) {
 }
 
 const SpeakerFavorite = ({ favorite, onFavoriteToggle }) => {
+  const [inTransition, setInTransition] = useState(false);
+
+  function doneCallback() {
+    setInTransition(false)
+    console.log(`In SpeakerFavorite: doneCallback ${new Date().getMilliseconds()}`)
+  }
+
+
   return ( 
     <div className="action padB1">
       <span
-       onClick={onFavoriteToggle}
+       onClick={function () {
+        setInTransition(true)
+        return onFavoriteToggle(doneCallback)
+       }}
       >
         <i className={
           favorite === true ?
           "fa fa-star orange" : "fa fa-star-o orange"
         } />{" "}
         Favorite{" "}
+        {inTransition ? (
+          <span className="fas fa-circle-notch fa-spin"></span>
+        ) : null}
       </span>
     </div>
    );
@@ -57,8 +74,18 @@ function SpeakerDemographics({  first, last, bio, company, twitterHandle, favori
          onFavoriteToggle={onFavoriteToggle}
         />
         <div>
-          <p>{bio}{company}{twitterHandle}</p>
+        <p className="card-description">{bio}</p>
+        <div className="social d-flex flex-row mt-4">
+          <div className="company">
+            <h5>Company</h5>
+            <h6>{company}</h6>
+          </div>
+          <div className="twitter">
+            <h5>Twitter</h5>
+            <h6>{twitterHandle}</h6>
+          </div>
         </div>
+      </div>
       </div>                      
     )
 }
