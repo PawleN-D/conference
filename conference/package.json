@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "eslint": "latest",
-    "eslint-config-next": "latest",
-    "react-placeholder": "^4.1.0"
+    "eslint-config-next": "latest"
   }
 }

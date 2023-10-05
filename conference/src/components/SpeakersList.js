@@ -1,7 +1,6 @@
 import Speaker from "./Speaker";
 import useRequestDelay, { REQUEST_STATUS } from "../hooks/useRequestDelay";
 import { data } from "@/SpeakerData";
-import ReactPlaceholder from "react-placeholder";
 
 const SpeakersList = ({ showSessions }) => {
 
@@ -21,12 +20,6 @@ const SpeakersList = ({ showSessions }) => {
 
     return ( 
         <div className="container speaker-list">
-            <ReactPlaceholder
-                type="media"
-                rows={15}
-                className="speakerslist-placeholder"
-                ready={requestStatus === REQUEST_STATUS.SUCCESS}
-            >
                 <div className="row">
                     {speakersData.map(function(speaker) {
                         return (
@@ -44,7 +37,6 @@ const SpeakersList = ({ showSessions }) => {
                         )
                     })}
                 </div>
-            </ReactPlaceholder>
         </div>
     );
 }
