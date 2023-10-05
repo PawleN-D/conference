@@ -11,11 +11,11 @@
   "dependencies": {
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "react-placeholder": "^4.1.0"
+    "react-dom": "latest"
   },
   "devDependencies": {
     "eslint": "latest",
-    "eslint-config-next": "latest"
+    "eslint-config-next": "latest",
+    "react-placeholder": "^4.1.0"
   }
 }
